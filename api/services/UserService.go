@@ -1,13 +1,18 @@
 package services
 
-import "github.com/inversion-go/alejoab12/user-api/api/models"
+import (
+	"github.com/google/uuid"
+	"github.com/inventario-go/alejoab12/user-api/api/models"
+	"github.com/inventario-go/alejoab12/user-api/api/repository"
+	"time"
+)
 
 func FindById(id string) models.User {
-	return models.User{
-		Document:       "1010194766",
-		DocumentTypeId: models.DocumentType{Id: "1", Name: "Cedula"},
-		Name:           "Manuel Alejandro",
-		LastName:       "Alcala Bustos",
-		Id:             "34234234",
-		Email:          "alejoab12@hotmail.com"}
+	return repository.FindUserById(id)
+}
+func CreateUser(user *models.User) {
+	user.CreatedAt = time.Now()
+	uuid, _ := uuid.NewRandom()
+	user.ID = uuid.String()
+	repository.CreateUser(user)
 }

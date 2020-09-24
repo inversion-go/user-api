@@ -1,6 +1,12 @@
 package models
 
+import "time"
+
 type DocumentType struct {
-	Id   string `json:"id"`
-	Name string `json:"name"`
+	ID        string `json:"id,readonly",gorm:"primary_key"`
+	Name      string `gorm:"column:name"`
+	Users     []User
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt *time.Time `sql:"index"`
 }

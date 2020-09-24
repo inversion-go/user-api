@@ -2,12 +2,31 @@ package handler
 
 import (
 	"encoding/json"
-	"github.com/inversion-go/alejoab12/user-api/api/services"
+	"fmt"
+	"github.com/gorilla/mux"
+	"github.com/inventario-go/alejoab12/user-api/api/models"
+	"github.com/inventario-go/alejoab12/user-api/api/services"
 
 	"net/http"
 )
 
 func UserById(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(services.FindById("2"))
+	w.Header().Add("Content-Type", "application/json;charset=utf-8")
+	id, ok := mux.Vars(r)["id"]
+	if !ok {
+		w.WriteHeader(404)
+	} else {
+		fmt.Println(id)
+		json.NewEncoder(w).Encode(services.FindById(id))
+	}
 
+}
+func CreateUser(w http.ResponseWriter, r *http.Request) {
+	var user models.User
+	err := json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		panic(err)
+	}
+	services.CreateUser(&user)
+	w.WriteHeader(201)
 }
