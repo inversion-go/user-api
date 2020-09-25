@@ -13,6 +13,7 @@ import (
 func UserById(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json;charset=utf-8")
 	id, ok := mux.Vars(r)["id"]
+	fmt.Println(id)
 	if !ok {
 		w.WriteHeader(404)
 	} else {

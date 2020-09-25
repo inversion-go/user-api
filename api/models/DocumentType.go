@@ -3,7 +3,7 @@ package models
 import "time"
 
 type DocumentType struct {
-	ID        string `json:"id,readonly",gorm:"primary_key"`
+	ID        string `json:"id,readonly",gorm:"primary_key,column:_id"`
 	Name      string `gorm:"column:name"`
 	Users     []User
 	CreatedAt time.Time

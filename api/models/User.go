@@ -4,7 +4,7 @@ import "time"
 
 type User struct {
 	//gorm.Model
-	ID             string     `json:"id,readonly",gorm:"primaryKey,column:id"`
+	ID             string     `json:"id,readonly",gorm:"primaryKey,column:_id"`
 	DocumentTypeID string     `json:"documentTypeId",gorm:"foreignKey:Users"`
 	Document       string     `json:"document",gorm:"column:document"`
 	Name           string     `json:"name",gorm:"column:name"`
